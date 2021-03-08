@@ -10,7 +10,7 @@ using System;
 namespace AcmeCorporation.CsvImporter
 {
     /// <summary>
-    /// Class manager to Environment App, use the injection dependency and the class use singleton pattern
+    /// Class manager to Environment App, use the dependency injection and the class use singleton pattern
     /// </summary>
     public sealed class EnviromentSetting
     {

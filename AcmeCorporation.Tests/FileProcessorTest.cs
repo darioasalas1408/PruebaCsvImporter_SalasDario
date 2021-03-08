@@ -10,7 +10,7 @@ namespace AcmeCorporation.Test
     public class FileProcessorTest
     {
         /// <summary>
-        /// Basic Test, for check if both method are using only in one times
+        /// Basic Test, for check if both method are called only once
         /// </summary>
         /// <returns></returns>
         [Fact]

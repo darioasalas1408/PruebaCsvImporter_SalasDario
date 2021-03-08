@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 namespace AcmeCorporation.BussinesLogic
 {
     /// <summary>
-    /// Class to retrivie and process the strem from Azure
+    /// Class to retrieve and process the stream from Azure
     /// </summary>
     public class FileProcessor : IFileProcessor
     {
