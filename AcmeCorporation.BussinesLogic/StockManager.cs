@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace AcmeCorporation.BussinesLogic
 {
+    /// <summary>
+    ///Manager/Service to the Stock Entity
+    /// </summary>
     public class StockManager : IStockManager
     {
         private IUnitOfWork unitOfWork;
@@ -23,6 +26,7 @@ namespace AcmeCorporation.BussinesLogic
             }
         }
 
+        //Clear all Rows in Db
         public async Task ClearAllRecords()
         {
             try
@@ -34,9 +38,10 @@ namespace AcmeCorporation.BussinesLogic
                 logger.Error(ex);
                 throw;
             }
-            
+
         }
 
+        //Adding a list of Stock in Db. 
         public async Task AddRangeOfStock(IEnumerable<StockProduct> page)
         {
             try
@@ -48,7 +53,7 @@ namespace AcmeCorporation.BussinesLogic
                 logger.Error(ex);
                 throw;
             }
-            
+
         }
     }
 }

@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace AcmeCorporation.BussinesLogic
 {
+    /// <summary>
+    /// Class manager to connect to AZURE
+    /// </summary>
     public class SourceRetrieverFromAzure : ISourceRetriever
     {
         private readonly BlobAzureModel blobAzure;

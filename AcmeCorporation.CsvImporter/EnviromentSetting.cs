@@ -9,6 +9,9 @@ using System;
 
 namespace AcmeCorporation.CsvImporter
 {
+    /// <summary>
+    /// Class manager to Environment App, use the injection dependency and the class use singleton pattern
+    /// </summary>
     public sealed class EnviromentSetting
     {
         private static readonly EnviromentSetting instance = new EnviromentSetting();
@@ -46,6 +49,7 @@ namespace AcmeCorporation.CsvImporter
             }
         }
 
+        //Adding the different enviroment settings
         private void ConfigurationBuilder()
         {
             configuration = new ConfigurationBuilder()
@@ -54,6 +58,7 @@ namespace AcmeCorporation.CsvImporter
              .Build();
         }
 
+        //Inject the different class, use the patter UnitOfWork for the Repositories
         private void ServiceProvider()
         {
             var serviceCollection = new ServiceCollection()

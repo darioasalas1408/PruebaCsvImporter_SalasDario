@@ -9,6 +9,10 @@ namespace AcmeCorporation.Test
 {
     public class FileProcessorTest
     {
+        /// <summary>
+        /// Basic Test, for check if both method are using only in one times
+        /// </summary>
+        /// <returns></returns>
         [Fact]
         public async Task Should_Call_Valid_Methods()
         {
