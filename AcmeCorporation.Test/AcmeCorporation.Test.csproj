@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Moq" Version="4.16.1" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.core" Version="2.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AcmeCorporation.BussinesLogic\AcmeCorporation.BussinesLogic.csproj" />
+    <ProjectReference Include="..\AcmeCorporation.CsvImporter\AcmeCorporation.CsvImporter.csproj" />
+    <ProjectReference Include="..\AcmeCorporation.DAL\AcmeCorporation.DAL.csproj" />
+    <ProjectReference Include="..\AcmeCorporation.Model\AcmeCorporation.Model.csproj" />
+  </ItemGroup>
+
+</Project>
