@@ -20,14 +20,23 @@ namespace AcmeCorporation.BussinesLogic
 
         public async Task<(Stream?, long)> RetrieveSourceAsStream()
         {
-            logger.Info("Reading from Azure");
-            Uri uriAzureBlob = new Uri(blobAzure.Uri);
-            BlobServiceClient blobServiceClient = new BlobServiceClient(uriAzureBlob, null);
-            BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(blobAzure.ContainerClient);
-            BlobClient blobClient = containerClient.GetBlobClient(blobAzure.BlobClient);
+            try
+            {
+                logger.Info("Reading from Azure");
+                Uri uriAzureBlob = new Uri(blobAzure.Uri);
+                BlobServiceClient blobServiceClient = new BlobServiceClient(uriAzureBlob, null);
+                BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(blobAzure.ContainerClient);
+                BlobClient blobClient = containerClient.GetBlobClient(blobAzure.BlobClient);
 
-            var response = await blobClient.DownloadAsync();
-            return (response.Value.Content, (response.Value.ContentLength - 1));
+                var response = await blobClient.DownloadAsync();
+                return (response.Value.Content, (response.Value.ContentLength - 1));
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex);
+                throw;
+            }
+            
         }
     }
 }

@@ -20,15 +20,32 @@ namespace AcmeCorporation.DAL
 
         public async Task ClearAllRecords()
         {
-            var allRecords = context.Stocks;
-            context.Stocks.RemoveRange(allRecords);
-            await context.SaveChangesAsync();
+            try
+            {
+                var allRecords = context.Stocks;
+                context.Stocks.RemoveRange(allRecords);
+                await context.SaveChangesAsync();
+            }
+            catch (System.Exception ex)
+            {
+                logger.Error(ex);
+                throw;
+            }
         }
 
         public async Task<bool> AddRange(IEnumerable<StockProduct> listStockProduct)
         {
-            await context.BulkInsertAsync(listStockProduct);
-            return true;
+            try
+            {
+                await context.BulkInsertAsync(listStockProduct);
+                return true;
+            }
+            catch (System.Exception ex)
+            {
+                logger.Error(ex);
+                throw;
+            }
+            
         }
     }
 }

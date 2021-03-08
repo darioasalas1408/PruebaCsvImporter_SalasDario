@@ -3,7 +3,7 @@
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ImportDbContext context;
-        private IStockRepository _StockRepository;
+        private IStockRepository stockRepository;
 
         public UnitOfWork(ImportDbContext importDbContex)
         {
@@ -14,11 +14,11 @@
         {
             get
             {
-                if (_StockRepository == null)
+                if (stockRepository == null)
                 {
-                    _StockRepository = new StockRepository(context);
+                    stockRepository = new StockRepository(context);
                 }
-                return _StockRepository;
+                return stockRepository;
             }
 
         }

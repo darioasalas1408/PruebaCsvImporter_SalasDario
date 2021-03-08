@@ -11,9 +11,9 @@ namespace AcmeCorporation.CsvImporter
 {
     public sealed class EnviromentSetting
     {
-        private static readonly EnviromentSetting _instance = new EnviromentSetting();
-        private static IConfiguration _configuration;
-        private static IServiceProvider _serviceCollection;
+        private static readonly EnviromentSetting instance = new EnviromentSetting();
+        private static IConfiguration configuration;
+        private static IServiceProvider serviceCollection;
 
         private EnviromentSetting()
         {
@@ -25,7 +25,7 @@ namespace AcmeCorporation.CsvImporter
         {
             get
             {
-                return _instance;
+                return instance;
             }
 
         }
@@ -34,7 +34,7 @@ namespace AcmeCorporation.CsvImporter
         {
             get
             {
-                return _configuration;
+                return configuration;
             }
         }
 
@@ -42,13 +42,13 @@ namespace AcmeCorporation.CsvImporter
         {
             get
             {
-                return _serviceCollection;
+                return serviceCollection;
             }
         }
 
         private void ConfigurationBuilder()
         {
-            _configuration = new ConfigurationBuilder()
+            configuration = new ConfigurationBuilder()
              .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
              .AddEnvironmentVariables()
              .Build();
@@ -61,7 +61,7 @@ namespace AcmeCorporation.CsvImporter
               .AddScoped<IFileProcessor, FileProcessor>()
               .AddScoped<IStreamProcessor, StreamProcessor>()
               .AddScoped<IUnitOfWork, UnitOfWork>()
-              .AddDbContext<ImportDbContext>(o => o.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
+              .AddDbContext<ImportDbContext>(o => o.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             var blobAzure = new BlobAzureModel();
             Configuration.Bind("BlobAzure", blobAzure);
@@ -69,7 +69,7 @@ namespace AcmeCorporation.CsvImporter
             serviceCollection.AddScoped<ISourceRetriever>(x =>
                 new SourceRetrieverFromAzure(blobAzure));
 
-            _serviceCollection = serviceCollection.BuildServiceProvider();
+            EnviromentSetting.serviceCollection = serviceCollection.BuildServiceProvider();
         }
 
     }
