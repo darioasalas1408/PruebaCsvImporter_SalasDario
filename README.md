@@ -20,6 +20,9 @@ Para el proceso principal, el que inserta en la base, decidí dividir los archiv
 De esta forma, se podria tener un control sobre que se va insertando, y a futuro, si falla un registro, no corte todo, solo un batch. Y se podría hacer un control sobre este bach que produjo la falla.
 
 Ademas realice un Test unitario, básico, como para verificar si los procesos principales, no se usen más de una vez en la aplicación, asegurando, que futuro desarrollos estos módulos que son core de la aplicación, no se pueda usar más de una vez.
+
+En la carpeta **Doc**, estan los script de creación de la base, como asi tambien una copia del archivo csv, para hacer un test unitario de la carga de la misma(No llege a realizarlo).
+
 ## Tecnolgias Usadas
 * Ncapas 
 * CsvHelper 
