@@ -1,27 +1,31 @@
 ## Acme Corporation - Salas Dario
 Prueba realizada con .net Core y C#
-## Divicion de Capas
+## División de Capas
 ### AcmeCorporation.CsvImporter
-Proyecto principal, es del tipo consola, se implementó Nlog, Singleton e Inyección de Independencia
+Proyecto principal, de tipo consola. Se implementó Nlog, Singleton e Inyección de Dependencias
 ### AcmeCorporation.BussinesLogic
 Capa encargada de la lógica, en el ella está el procesamiento y obtención del csv de AZURE. Como asi tambien la administración de la entidad de Stock.
 ### AcmeCorporation.DAL
-Capa encargada de administrar la conexión a la base, en ella se encuentra los repositorios, usa EntityFramework, el patrón UnitOfWork (para la administración de los repositorios), ademas usamos BulkDbContextExtensions, para la inserción masiva de los archivos.
+Capa encargada de administrar la conexión a la base de datos. En ella se encuentran los repositorios. Usa EntityFramework, el patrón UnitOfWork (para la administración de los repositorios), además usamos BulkDbContextExtensions, para la inserción masiva de los registros.
 ### AcmeCorporation.Model
-Capa que persiste por todas las demás capas, para los modelos que se van a utilizar en la solución.
+Capa que persiste por todas las demás, para los modelos que se van a utilizar en la solución.
 ### AcmeCorporation.Tests
-Proyecto encargado de los test Unitarios.
+Proyecto encargado de los tests Unitarios.
 ## Nota
-Realice diferentes pruebas para optimizar el proceso, termine usando Bulk para la inserción (AddRange de EntityFramework era mas lento). Obviamente para futuro, será mejor hacer un stored, que sería más perfomante. 
+Realicé diferentes pruebas para optimizar el proceso. Terminé usando Bulk para la inserción (AddRange de EntityFramework era más lento). Para futuro, me gustaría explorar la alternativa de utilizar un Stored Procedure para hacer la inserción ya que asumo que puede ser más performante. 
 
-La inyección, nunca la había usado desde una aplicación de Consola, no estoy seguro que sea la mejor forma, es un desafío a futuro que quiero investiga.
-Para el proceso principal, el que inserta en la base, decidí dividir los archivos en batch de 1000, para evitar insertar de uno a uno, lo cual no me parecía lo correcto. 
+Nunca había usado antes inyección de dependencias desde una aplicación de Consola. No estoy seguro de haberlo implementado de la mejor forma, es un desafío a futuro que quiero investigar.
+Para el proceso principal, el que inserta en la base de datos, decidí dividir los archivos en batches de 1000 registros, para evitar insertar de uno a uno, lo cual no me parecía correcto. 
 
-De esta forma, se podria tener un control sobre que se va insertando, y a futuro, si falla un registro, no corte todo, solo un batch. Y se podría hacer un control sobre este bach que produjo la falla.
+De esta forma, se podría tener un control sobre qué se va insertando, y a futuro, si falla un registro, no detenga el proceso, sino un sólo batch y hacer un control sobre el mismo.
+Además realicé un Test unitario básico para verificar que los procesos principales que se llamen sólo una vez, asegurando que el los módulos core que son: Descarga y Proceso del Archivo, siempre se produzcan. Por cuestiones de tiempo, no llegué a desarrollar el resto de tests cases que tenía pensado. Algunos de ellos eran: 
+*	Que cuando los datos de Azure sean correctos, la descarga del archivo se produzca correctamente
+*	Que cuando los datos de Azure sean incorrectos, no se produzca descarga
+*	Que el procesamiento del archivo se procese correctamente, moqueando con Moq, la descarga del mismo
+*	Que cuando el archivo tenga al menos un registro, se realice una inserción en la base de datos
+*	Otros. 
 
-Ademas realice un Test unitario, básico, como para verificar si los procesos principales, no se usen más de una vez en la aplicación, asegurando, que futuro desarrollos estos módulos que son core de la aplicación, no se pueda usar más de una vez.
-
-En la carpeta **Doc**, estan los script de creación de la base, como asi tambien una copia del archivo csv, para hacer un test unitario de la carga de la misma(No llege a realizarlo).
+En la carpeta **Doc**, están los script de creación de la base, como así también una copia del archivo csv, para hacer un test unitario de la carga de la misma.
 
 ## Tecnolgias Usadas
 * Ncapas 
@@ -33,3 +37,4 @@ En la carpeta **Doc**, estan los script de creación de la base, como asi tambie
 * UnitOfWork 
 * Singleton 
 * NUnit
+
