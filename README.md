@@ -1,6 +1,6 @@
 # Acme Corporation - Salas Dario
 
-> Prueba realizada con .net Core y C#
+Prueba realizada con .net Core y C#
 
 # Divicion de Clases
 
